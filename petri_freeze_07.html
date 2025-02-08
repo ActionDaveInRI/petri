@@ -86,8 +86,8 @@
         <h3>General Settings</h3>
         <div class="control-group">
           <label for="speedControl">Simulation Speed:</label>
-          <input id="speedControl" type="range" min="0" max="10" step="0.001" value="6.456">
-          <span id="speedDisplay">6.456</span>
+          <input id="speedControl" type="range" min="0" max="10" step="0.001" value="8.153">
+          <span id="speedDisplay">8.153</span>
         </div>
         <div class="control-group">
           <label for="mutationSlider">Mutation Multiplier:</label>
@@ -111,13 +111,14 @@
         <h3>Hairy</h3>
         <div class="control-group">
           <label for="hairyNibbleSlider">Nibble Prob.:</label>
-          <input id="hairyNibbleSlider" type="range" min="0.05" max="0.8" step="0.01" value="0.43">
-          <span id="hairyNibbleDisplay">0.43</span>
+          <input id="hairyNibbleSlider" type="range" min="0.05" max="0.8" step="0.01" value="0.29">
+          <span id="hairyNibbleDisplay">0.29</span>
         </div>
         <div class="control-group">
           <label for="hairyEnergySlider">Initial Energy:</label>
-          <input id="hairyEnergySlider" type="range" min="10" max="100" step="1" value="10">
-          <span id="hairyEnergyDisplay">10</span>
+          <!-- Updated default from 31 to 27 -->
+          <input id="hairyEnergySlider" type="range" min="10" max="100" step="1" value="27">
+          <span id="hairyEnergyDisplay">27</span>
         </div>
         <div class="control-group">
           <label for="hairyVsHairySlider">Vs. Hairy Damage Prob.:</label>
@@ -126,13 +127,13 @@
         </div>
         <div class="control-group">
           <label for="hairyHuntDamageSlider">Hunt Damage:</label>
-          <input id="hairyHuntDamageSlider" type="range" min="1" max="20" step="1" value="9">
-          <span id="hairyHuntDamageDisplay">9</span>
+          <input id="hairyHuntDamageSlider" type="range" min="1" max="20" step="1" value="15">
+          <span id="hairyHuntDamageDisplay">15</span>
         </div>
         <div class="control-group">
           <label for="hairyFightDamageSlider">Fight Damage:</label>
-          <input id="hairyFightDamageSlider" type="range" min="1" max="20" step="1" value="16">
-          <span id="hairyFightDamageDisplay">16</span>
+          <input id="hairyFightDamageSlider" type="range" min="1" max="20" step="1" value="17">
+          <span id="hairyFightDamageDisplay">17</span>
         </div>
       </div>
       
@@ -141,8 +142,8 @@
         <h3>Shelly</h3>
         <div class="control-group">
           <label for="shellyNibbleSlider">Nibble Prob.:</label>
-          <input id="shellyNibbleSlider" type="range" min="0.01" max="0.25" step="0.01" value="0.16">
-          <span id="shellyNibbleDisplay">0.16</span>
+          <input id="shellyNibbleSlider" type="range" min="0.01" max="0.25" step="0.01" value="0.15">
+          <span id="shellyNibbleDisplay">0.15</span>
         </div>
         <div class="control-group">
           <label for="shellyEnergySlider">Initial Energy:</label>
@@ -166,8 +167,8 @@
         </div>
         <div class="control-group">
           <label for="shellyMobDamageSlider">Mob Damage:</label>
-          <input id="shellyMobDamageSlider" type="range" min="1" max="20" step="1" value="3">
-          <span id="shellyMobDamageDisplay">3</span>
+          <input id="shellyMobDamageSlider" type="range" min="1" max="20" step="1" value="4">
+          <span id="shellyMobDamageDisplay">4</span>
         </div>
       </div>
       
@@ -309,8 +310,8 @@
     
     document.getElementById('resetDefaults').addEventListener("click", () => {
       // General defaults
-      document.getElementById('speedControl').value = 10.000;
-      simulationSpeed = 10.000;
+      document.getElementById('speedControl').value = 8.153;
+      simulationSpeed = 8.153;
       document.getElementById('mutationSlider').value = 10.0;
       GLOBAL_MUTATION_MULTIPLIER = 10.0;
       // Goo defaults
@@ -319,8 +320,9 @@
       // Hairy defaults
       document.getElementById('hairyNibbleSlider').value = 0.43;
       HAIRY_NIBBLE_PROBABILITY = 0.43;
-      document.getElementById('hairyEnergySlider').value = 10;
-      HAIRY_INITIAL_ENERGY = 10;
+      // Updated default for Hairy Initial Energy is now 27.
+      document.getElementById('hairyEnergySlider').value = 27;
+      HAIRY_INITIAL_ENERGY = 27;
       document.getElementById('hairyVsHairySlider').value = 1.00;
       HAIRY_VS_HAIRY_DAMAGE_PROBABILITY = 1.00;
       document.getElementById('hairyHuntDamageSlider').value = 9;
@@ -328,8 +330,8 @@
       document.getElementById('hairyFightDamageSlider').value = 16;
       HAIRY_FIGHT_DAMAGE = 16;
       // Shelly defaults
-      document.getElementById('shellyNibbleSlider').value = 0.16;
-      SHELLY_NIBBLE_PROBABILITY = 0.16;
+      document.getElementById('shellyNibbleSlider').value = 0.15;
+      SHELLY_NIBBLE_PROBABILITY = 0.15;
       document.getElementById('shellyEnergySlider').value = 33;
       SHELLY_INITIAL_ENERGY = 33;
       document.getElementById('shellyMunchDamageSlider').value = 2;
@@ -337,8 +339,8 @@
       // Mobbing / Combat defaults
       document.getElementById('shellyMinMobSlider').value = 4;
       SHELLY_MIN_MOB_SIZE = 4;
-      document.getElementById('shellyMobDamageSlider').value = 3;
-      SHELLY_MOB_DAMAGE = 3;
+      document.getElementById('shellyMobDamageSlider').value = 4;
+      SHELLY_MOB_DAMAGE = 4;
       updateSliderDisplays();
     });
     
@@ -355,7 +357,8 @@
     let particles = [];           // All critters
     let poops = [];               // Poop objects
     let radioactiveZones = [];    // Radiation zones
-    const maxPopulation = 300;
+    // Set maximum population to 800.
+    const maxPopulation = 800;
     
     // Placement mode globals.
     let placementMode = false;
@@ -456,7 +459,8 @@
           const baseSize = particle.size;
           for (let i = 0; i < 3; i++) {
             const angle = i * (2 * Math.PI / 3);
-            const pulse = 1 + 0.1 * Math.sin(particle.age * 0.1 + i);
+            // Slowed pulse: using particle.age * 0.05 instead of 0.1.
+            const pulse = 1 + 0.1 * Math.sin(particle.age * 0.05 + i);
             const orbSize = baseSize * pulse;
             const offset = baseSize * 1.0;
             const orbX = x + offset * Math.cos(angle);
@@ -963,7 +967,7 @@
             const dy = particle.y - poop.y;
             const d = Math.sqrt(dx * dx + dy * dy);
             if (d < 30) {
-              // Increased boost: add 3 energy instead of 2.
+              // Increased boost: add 3 energy.
               addEnergy(particle, 3);
               poop.lifetime -= 1;
               particle.absorbCue = 30;
@@ -1015,7 +1019,7 @@
         ) {
           particles.push(reproduceParticle(particle));
           if (particle.type === 0) {
-            // Make Goo slightly more reproductive by reducing its cooldown by 10%
+            // Reduce Goo reproduction cooldown by 10% for slightly faster reproduction.
             let newCooldown = (250 - ((particle.dna.detailHue - 75) * 100 / 70)) * 0.9;
             particle.reproductionCooldown = newCooldown;
             particle.energy -= 20;
